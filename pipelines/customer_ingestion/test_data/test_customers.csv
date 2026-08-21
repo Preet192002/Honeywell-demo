@@ -1,0 +1,11 @@
+CUSTOMER_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,ADDRESS,CITY,STATE,COUNTRY,CREATED_DATE
+C001,John,Doe,john.doe@example.com,+1-555-0101,123 Main St,Springfield,IL,USA,2024-01-15
+C002,Jane,Smith,jane.smith@example.com,+1-555-0102,456 Oak Ave,Portland,OR,USA,2024-02-20
+C003,Bob,Johnson,bob.j@company.org,+1-555-0103,789 Pine Rd,Austin,TX,USA,2024-03-10
+C004,Alice,Williams,alice.w@domain.com,,321 Elm Dr,Denver,CO,USA,2024-04-05
+C005,Charlie,Brown,charlie.b@email.net,+1-555-0105,654 Maple Ln,Seattle,WA,USA,2024-05-12
+,Missing,CustomerID,missing.id@test.com,+1-555-0106,111 Test St,TestCity,TS,USA,2024-06-01
+C007,,NoFirstName,no.first@test.com,+1-555-0107,222 Test Ave,TestTown,TS,USA,2024-06-02
+C008,NoLast,,no.last@test.com,+1-555-0108,333 Test Blvd,TestVille,TS,USA,2024-06-03
+C009,No,Email,,+1-555-0109,444 Test Ct,TestBurg,TS,USA,2024-06-04
+C010,Bad,EmailFormat,not-an-email,+1-555-0110,555 Test Way,TestHam,TS,USA,2024-06-05
