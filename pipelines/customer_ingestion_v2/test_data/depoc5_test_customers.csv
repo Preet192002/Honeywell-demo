@@ -1,0 +1,13 @@
+CUSTOMER_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,ADDRESS,CITY,STATE,COUNTRY,CREATED_DATE
+C101,Preet,Gugale,preet@example.com,+1-555-1001,100 Tech Blvd,Pune,MH,India,2024-01-10
+C102,Alice,Johnson,alice.j@company.com,+1-555-1002,200 Oak St,Austin,TX,USA,2024-02-15
+C103,Bob,Smith,bob.smith@org.net,+1-555-1003,300 Pine Ave,Denver,CO,USA,2024-03-20
+C104,Carol,Williams,carol.w@mail.com,+1-555-1004,400 Elm Dr,Seattle,WA,USA,2024-04-25
+C105,David,Brown,david.b@domain.org,+1-555-1005,500 Maple Ln,Portland,OR,USA,2024-05-30
+,NoID,Person,noid@test.com,+1-555-2001,111 Fail St,TestCity,TS,USA,2024-06-01
+C201,,NoFirst,nofirst@test.com,+1-555-2002,222 Fail Ave,TestTown,TS,USA,2024-06-02
+C202,No,Email,,+1-555-2003,333 Fail Blvd,TestVille,TS,USA,2024-06-03
+C203,Bad,Email,not-an-email,+1-555-2004,444 Fail Ct,TestBurg,TS,USA,2024-06-04
+C204,No,Country,nocountry@test.com,+1-555-2005,555 Fail Way,TestHam,TS,,2024-06-05
+C101,Preet,Gugale-Updated,preet.updated@example.com,+1-555-1001,101 New Tech Blvd,Mumbai,MH,India,2024-07-01
+C103,Robert,Smith,bob.s.new@org.net,+1-555-1003,301 New Pine,Denver,CO,USA,2024-07-10
