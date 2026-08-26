@@ -1,0 +1,1 @@
+feat(DEPOC-13): add DDL for customer onboarding tables
