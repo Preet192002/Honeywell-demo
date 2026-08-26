@@ -1,0 +1,1 @@
+feat(DEPOC-13): add onboarding pipeline stored procedures
