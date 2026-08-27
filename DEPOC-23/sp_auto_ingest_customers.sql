@@ -1,0 +1,1 @@
+feat(DEPOC-23): implement automated customer data ingestion pipeline
