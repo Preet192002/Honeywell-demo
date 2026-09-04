@@ -1,0 +1,15 @@
+-- Create CSV file format for customer data ingestion
+-- Co-authored with CoCo
+
+USE DATABASE DE_POC;
+USE SCHEMA PUBLIC;
+
+CREATE OR REPLACE FILE FORMAT CUSTOMER_CSV_FORMAT
+    TYPE = 'CSV'
+    FIELD_DELIMITER = ','
+    RECORD_DELIMITER = '\n'
+    SKIP_HEADER = 1
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+    NULL_IF = ('', 'NULL', 'null')
+    EMPTY_FIELD_AS_NULL = TRUE
+    ERROR_ON_COLUMN_COUNT_MISMATCH = FALSE;
