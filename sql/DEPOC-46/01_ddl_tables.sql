@@ -1,0 +1,80 @@
+-- DEPOC-46: DDL for customer data ingestion pipeline tables
+-- Co-authored with CoCo
+
+-- File Format
+CREATE OR REPLACE FILE FORMAT DE_POC.PUBLIC.CSV_CUSTOMER_FORMAT
+    TYPE = 'CSV'
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+    SKIP_HEADER = 1
+    NULL_IF = ('NULL', 'null', '')
+    TRIM_SPACE = TRUE
+    ERROR_ON_COLUMN_COUNT_MISMATCH = FALSE;
+
+-- Raw staging table
+CREATE OR REPLACE TABLE DE_POC.PUBLIC.RAW_CUSTOMERS (
+    CUSTOMER_ID       VARCHAR(50),
+    FIRST_NAME        VARCHAR(100),
+    LAST_NAME         VARCHAR(100),
+    EMAIL             VARCHAR(200),
+    PHONE             VARCHAR(50),
+    ADDRESS           VARCHAR(500),
+    CITY              VARCHAR(100),
+    STATE             VARCHAR(100),
+    COUNTRY           VARCHAR(100),
+    POSTAL_CODE       VARCHAR(20),
+    CREATED_DATE      VARCHAR(50),
+    UPDATED_DATE      VARCHAR(50),
+    _LOAD_FILE        VARCHAR(500),
+    _LOAD_TIMESTAMP   TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP(),
+    _LOAD_ID          VARCHAR(50)
+) COMMENT = 'Raw staging table for customer data ingestion';
+
+-- Target customer table
+CREATE OR REPLACE TABLE DE_POC.PUBLIC.CUSTOMERS (
+    CUSTOMER_ID       VARCHAR(50)   NOT NULL,
+    FIRST_NAME        VARCHAR(100),
+    LAST_NAME         VARCHAR(100),
+    EMAIL             VARCHAR(200),
+    PHONE             VARCHAR(50),
+    ADDRESS           VARCHAR(500),
+    CITY              VARCHAR(100),
+    STATE             VARCHAR(100),
+    COUNTRY           VARCHAR(100),
+    POSTAL_CODE       VARCHAR(20),
+    CREATED_DATE      TIMESTAMP_NTZ,
+    UPDATED_DATE      TIMESTAMP_NTZ,
+    _INSERTED_AT      TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP(),
+    _UPDATED_AT       TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP(),
+    _LOAD_ID          VARCHAR(50),
+    _IS_ACTIVE        BOOLEAN DEFAULT TRUE,
+    CONSTRAINT PK_CUSTOMERS PRIMARY KEY (CUSTOMER_ID)
+) COMMENT = 'Target customer table with deduplicated, validated records';
+
+-- Error log table
+CREATE OR REPLACE TABLE DE_POC.PUBLIC.PIPELINE_ERROR_LOG (
+    ERROR_ID          NUMBER AUTOINCREMENT,
+    LOAD_ID           VARCHAR(50),
+    SOURCE_FILE       VARCHAR(500),
+    RECORD_DATA       VARIANT,
+    ERROR_TYPE        VARCHAR(100),
+    ERROR_DETAILS     VARCHAR(2000),
+    CUSTOMER_ID       VARCHAR(50),
+    LOGGED_AT         TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
+) COMMENT = 'Error log for invalid/failed records during pipeline execution';
+
+-- Load tracking table
+CREATE OR REPLACE TABLE DE_POC.PUBLIC.PIPELINE_LOAD_TRACKING (
+    LOAD_ID           VARCHAR(50) NOT NULL,
+    SOURCE_FILE       VARCHAR(500),
+    LOAD_TIMESTAMP    TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP(),
+    TOTAL_ROWS        NUMBER,
+    VALID_ROWS        NUMBER,
+    INVALID_ROWS      NUMBER,
+    INSERTED_ROWS     NUMBER,
+    UPDATED_ROWS      NUMBER,
+    DUPLICATE_ROWS    NUMBER,
+    STATUS            VARCHAR(20),
+    ERROR_MESSAGE     VARCHAR(2000),
+    COMPLETED_AT      TIMESTAMP_NTZ,
+    CONSTRAINT PK_LOAD_TRACKING PRIMARY KEY (LOAD_ID)
+) COMMENT = 'Load tracking metadata for each pipeline execution';
